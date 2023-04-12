@@ -27,9 +27,9 @@ type CreateUserData = z.infer<typeof registerCompanySchema>
 export function App() {
   const dispatch = useDispatch();
   const state = useSelector<RootState>((state) => state);
-  function handleSendFormData(){
+/*   function handleSendFormData(){
     //console.log("currentState: ",state.data.CompanyData)
-  }
+  } */
 
   function registerCompany(data: CreateUserData){
     console.log("data: ",data)
@@ -97,11 +97,11 @@ export function App() {
           </button>
         </form>
       </FormProvider>
-      <button  
+   {/*    <button  
       onClick={handleSendFormData}
       className="bg-green-500 flex flex-col items-center justify-center text-white rounded px-3 h-10 font-semibold text-sm hover:bg-green-600">
         Send data
-      </button>
+      </button> */}
 
     </main>
   )
