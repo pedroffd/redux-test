@@ -8,32 +8,7 @@ import { ComplianceActionTypes } from './types';
 import { z } from 'zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5mb
-
-const registerCompanySchema = z.object({
-  companyName: z.string().nonempty({
-    message: 'Company Name is mandatory',
-  }).transform(name => {
-    return name
-      .trim()
-      .split(' ')
-      .map(word => word[0].toLocaleUpperCase().concat(word.substring(1)))
-      .join(' ')
-  }),
-  corporationDate: z.coerce.date()
-  .refine((date) => {
-    return date <= new Date()
-  }).transform(date => date.toISOString().substring(0,10)),
-
-  address: z.string(),
-  
-  document: z.instanceof(FileList)
-    .refine((files) => files.item(0)!.size <= MAX_FILE_SIZE, `Maximum size is 5MB`)
-    .transform(files => {
-      return files.item(0)!
-    }),
-})
+import { registerCompanySchema } from './schemas/registerCompanySchema'
 
 type Dispatch = ThunkDispatch<RootState, null, ComplianceActionTypes>;
 
@@ -60,55 +35,55 @@ const ComplianceRegistrationForm: React.FC = () => {
   } = registerCompanyForm;
 
   return (
-    <main className="h-screen flex flex-row gap-6 items-center justify-center">
+    <div className="flex flex-row gap-6 bg-gray-600 pt-4 pb-8 max-w-md mx-auto w-full opacity-90">
       <FormProvider {...registerCompanyForm}>
-    <form 
-      
-      onSubmit={handleSubmit(registerCompany)}
-      className="flex flex-col gap-4 w-full max-w-xs">
-         <Form.Field>
-            <Form.Label htmlFor="companyName">
-              Company Name
-            </Form.Label>
+        <form 
+          onSubmit={handleSubmit(registerCompany)}
+          className="flex flex-col gap-4 space-y-4 md:space-y-6 m-8">
+          <Form.Field>
+              <Form.Label htmlFor="companyName">
+                Company Name
+              </Form.Label>
 
-            <Form.Input type="text" name="companyName" />
-            <Form.ErrorMessage field="companyName" />
-          </Form.Field> 
+              <Form.Input type="text" name="companyName" />
+              <Form.ErrorMessage field="companyName" />
+            </Form.Field> 
 
-           <Form.Field>
-            <Form.Label htmlFor="document">
-              Document
-            </Form.Label>
+            <Form.Field>
+              <Form.Label htmlFor="document">
+                Document
+              </Form.Label>
 
-            <Form.Input type="file" name="document" />
-            <Form.ErrorMessage field="document" />
-          </Form.Field> 
-
-         <Form.Field>
-            <Form.Label htmlFor="address">
-              Address
-            </Form.Label>
-            <Form.Input type="text" name="address" />
-            <Form.ErrorMessage field="address" />
-          </Form.Field>
+              <Form.Input type="file" name="document" />
+              <Form.ErrorMessage field="document" />
+            </Form.Field> 
 
           <Form.Field>
-            <Form.Label htmlFor="corporationDate">
-              Corporation Date
-            </Form.Label>
-            <Form.Input type="date" name="corporationDate" />
-            <Form.ErrorMessage field="corporationDate" />
-          </Form.Field>  
-      <button 
-            type="submit" 
-            disabled={isSubmitting}
-            className="bg-violet-500 text-white rounded px-3 h-10 font-semibold text-sm hover:bg-violet-600"
-          >
-            Save
-          </button>
-    </form>
+              <Form.Label htmlFor="address">
+                Address
+              </Form.Label>
+              <Form.Input type="text" name="address" />
+              <Form.ErrorMessage field="address" />
+            </Form.Field>
+
+            <Form.Field>
+              <Form.Label htmlFor="corporationDate">
+                Corporation Date
+              </Form.Label>
+              <Form.Input type="date" name="corporationDate" />
+              <Form.ErrorMessage field="corporationDate" />
+            </Form.Field>  
+            
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="bg-violet-500 text-white rounded px-3 h-10 font-semibold text-sm hover:bg-violet-600"
+            >
+              Save
+            </button>
+        </form>
     </FormProvider>
-  </main>
+  </div>
   );
 };
 
