@@ -1,8 +1,6 @@
-
-import React, { useState } from 'react';
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import { RootState } from './store';
+import { RootState } from './redux/store';
 import { ComplianceActionTypes, REGISTER_COMPLIANCE_REQUEST, REGISTER_COMPLIANCE_SUCCESS, REGISTER_COMPLIANCE_FAILURE } from './types';
 import CryptoJS from "crypto-js";
 interface FormData {

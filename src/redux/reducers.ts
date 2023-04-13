@@ -4,7 +4,7 @@ import {
   REGISTER_COMPLIANCE_REQUEST,
   REGISTER_COMPLIANCE_SUCCESS,
   REGISTER_COMPLIANCE_FAILURE,
-} from './types';
+} from '../types';
 
 interface ComplianceState {
   loading: boolean;

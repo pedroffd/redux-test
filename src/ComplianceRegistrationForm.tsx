@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import {registerCompliance}  from './registerCompliance';
 import { Form } from './components/Form'
-import { RootState } from './store';
+import { RootState } from './redux/store';
 import { ComplianceActionTypes } from './types';
 import { z } from 'zod'
 import { useForm, FormProvider } from 'react-hook-form'
