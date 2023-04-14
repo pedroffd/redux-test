@@ -4,7 +4,11 @@ export default {
     './src/**/*.tsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        landingPage: "url('../public/images/background-landing.jpg')",
+      },
+    },
   },
   plugins: [],
 }
