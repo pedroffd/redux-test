@@ -39,7 +39,7 @@ const ComplianceRegistrationForm: React.FC = () => {
       <FormProvider {...registerCompanyForm}>
         <form 
           onSubmit={handleSubmit(registerCompany)}
-          className="flex flex-col gap-4 space-y-4 md:space-y-6 m-8">
+          className="flex flex-col gap-4 space-y-4 md:space-y-6 w-5/6 ml-8 mr-1">
           <Form.Field>
               <Form.Label htmlFor="companyName">
                 Company Name
