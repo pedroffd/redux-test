@@ -30,7 +30,7 @@ async (dispatch) => {
       const decrypted = CryptoJS.AES.decrypt(encryptedData, secretKey);
       return decrypted.toString(CryptoJS.enc.Utf8);
     };
-
+//console log has been left por testing purposes to make it easy to check on the deployed app
     const encryptedData = encryptData(JSON.stringify(formData), secretKey);
     console.log(`Encrypted data: ${encryptedData}`);
 
